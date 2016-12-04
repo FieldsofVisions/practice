@@ -1,70 +1,112 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 require('!style!css!sass!./style.scss');
+var Button = require('react-bootstrap').Button
+var Modal = require('react-bootstrap').Modal
 
-class CoolStuff extends React.Component{
-	constructor(){
-		super()
-		this.state={editing:false};
-		
-	}
-	edit(){
-		this.setState({editing:true});
-	}
-	remove(){
-		comments.slice(1,i);
-	}
-	save(){
-		this.setState({editing: false})
-		var val = this.refs.newText.value;
-	}
-		
+class MainBox extends React.Component{
+	
 	render(){
-		if(this.state.editing){
-			
-			return(<div  className="board">
-		      <textarea ref= "newText" defaultValue={this.props.children}></textarea>
-           <button className="btn-save" onClick={this.save.bind(this)}>SAVE</button>		   
-		</div>
-		);
-		
-		}else{
-			
-			return(<div className="board">
-			   <h2>{this.props.children}</h2>
-                 <button onClick={this.edit.bind(this)} className="btn-primary">EDIT</button>
-	           <button onClick={this.remove.bind(this)} className="btn-warn">REMOVE</button>
-			</div>	
-		);	
-		}
-		  
+		return(
+			<div>
+			  <Header />
+			    <RecipeList recipes = {this.props.recipes}/>
+			  <Footer />
+			</div>
+			);
 	}
 }
-
-class Board extends React.Component{
+class Header extends React.Component{
+	render(){
+		return(
+			<div>
+			 <h1>Recipe Box</h1>
+			 <ModalButton />
+			</div>
+			);
+	}
+}
+class RecipeList extends React.Component{
 	constructor(){
-		super()
-		this.state={comments: [
-		'andre', 
-		'is',
-		'awesome'
-		]}
+		super();
+		
+			this.defaultProps={recipes:[
+				{
+				 name: 'Chicken',
+			     ingredients: ['','',''],
+				 directions:""
+					},
+					{
+				 name: 'Beef',
+			     ingredients: ['','',''],
+				 directions:""
+					},
+					{
+				 name: 'Pork',
+			     ingredients: ['','',''],
+				 directions:""
+					},
+			]
+			}
 	}
 	render(){
 		return(
-		<div className="bigBoard">
-		{
-			this.state.comments.map(function(item, i){
-				return(<CoolStuff key={i}>{item}</CoolStuff>)
-			})
-			
-		}
-       </div>
-		);
+			<div>
+			{this.props.recipes}
+			</div>
+			);
 	}
 }
+class ModalButton extends React.Component{
+ constructor(){
+	 super();
+	 this.state={show:false}
+ }
 
+  render() {
+    let close = () => this.setState({ show: false});
+    let open = () =>this.setState({show:true});
+    return (
+      <div className="modal-container" style={{height: 200}}>
+        <Button
+          bsStyle="primary"
+          bsSize="large"
+          onClick={() => this.setState({ show: true})}
+        >
+          Launch contained modal
+        </Button>
+
+        <Modal
+          show={this.state.show}
+          onHide={close}
+          container={this}
+          aria-labelledby="contained-modal-title"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title id="contained-modal-title">Contained Modal</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            Elit est explicabo ipsum eaque dolorem blanditiis doloribus sed id ipsam, beatae, rem fuga id earum? Inventore et facilis obcaecati.
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={close}>Close</Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
+    );
+  }
+}
+
+class Footer extends React.Component{
+	render(){
+		return(
+			<div>
+			<h3>My Stuff goes here</h3>
+			</div>
+			);
+	}
+}
 ReactDOM.render(
- <Board />,
+ <MainBox />,
 document.getElementById('stuff')
 );
