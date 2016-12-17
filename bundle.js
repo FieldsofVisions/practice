@@ -66,88 +66,13 @@
 
 	__webpack_require__(172);
 
-	var CoolStuff = function (_React$Component) {
-		_inherits(CoolStuff, _React$Component);
-
-		function CoolStuff() {
-			_classCallCheck(this, CoolStuff);
-
-			var _this = _possibleConstructorReturn(this, (CoolStuff.__proto__ || Object.getPrototypeOf(CoolStuff)).call(this));
-
-			_this.state = { editing: false };
-
-			return _this;
-		}
-
-		_createClass(CoolStuff, [{
-			key: 'edit',
-			value: function edit() {
-				this.setState({ editing: true });
-			}
-		}, {
-			key: 'remove',
-			value: function remove() {
-				comments.slice(1, i);
-			}
-		}, {
-			key: 'save',
-			value: function save() {
-				this.setState({ editing: false });
-				var val = this.refs.newText.value;
-			}
-		}, {
-			key: 'render',
-			value: function render() {
-				if (this.state.editing) {
-
-					return _react2.default.createElement(
-						'div',
-						{ className: 'board' },
-						_react2.default.createElement('textarea', { ref: 'newText', defaultValue: this.props.children }),
-						_react2.default.createElement(
-							'button',
-							{ className: 'btn-save', onClick: this.save.bind(this) },
-							'SAVE'
-						)
-					);
-				} else {
-
-					return _react2.default.createElement(
-						'div',
-						{ className: 'board' },
-						_react2.default.createElement(
-							'h2',
-							null,
-							this.props.children
-						),
-						_react2.default.createElement(
-							'button',
-							{ onClick: this.edit.bind(this), className: 'btn-primary' },
-							'EDIT'
-						),
-						_react2.default.createElement(
-							'button',
-							{ onClick: this.remove.bind(this), className: 'btn-warn' },
-							'REMOVE'
-						)
-					);
-				}
-			}
-		}]);
-
-		return CoolStuff;
-	}(_react2.default.Component);
-
-	var Board = function (_React$Component2) {
-		_inherits(Board, _React$Component2);
+	var Board = function (_React$Component) {
+		_inherits(Board, _React$Component);
 
 		function Board() {
 			_classCallCheck(this, Board);
 
-			var _this2 = _possibleConstructorReturn(this, (Board.__proto__ || Object.getPrototypeOf(Board)).call(this));
-
-			_this2.state = { comments: ['andre', 'is', 'awesome'] };
-			return _this2;
+			return _possibleConstructorReturn(this, (Board.__proto__ || Object.getPrototypeOf(Board)).apply(this, arguments));
 		}
 
 		_createClass(Board, [{
@@ -155,14 +80,12 @@
 			value: function render() {
 				return _react2.default.createElement(
 					'div',
-					{ className: 'bigBoard' },
-					this.state.comments.map(function (item, i) {
-						return _react2.default.createElement(
-							CoolStuff,
-							{ key: i },
-							item
-						);
-					})
+					null,
+					_react2.default.createElement(
+						'button',
+						null,
+						'Open Modal'
+					)
 				);
 			}
 		}]);
